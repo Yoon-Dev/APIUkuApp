@@ -1,47 +1,36 @@
 <?php
-class Manager{
+class ImgWorker{
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     // caratéristique
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    protected $_conn;
+    protected   $_serveur,
+                $_destination;
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
     // CONSTRUCT
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
-    public function __construct($conn){$this->setDb($conn);}    
+    public function __construct(string $serveur, string $destination){$this->setServeur($serveur);$this->setDestination($destination);}    
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // fonctionnalité
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    public function getAll()
+    public function ThrowImgOnServer($img)
     {
-    // recupere la data d'une base de donnée
-    $content = [];
-
-            $q = $this->_conn->prepare('SELECT * FROM `uku_sheet`');
-            $q->execute([]);
-
-    
-    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
-        {
-
-                $content[] = $donnees;
-        }
-        echo json_encode($content);
-    }
-// °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°   
-    public function add(array $data)
-    {
-    // ajoute une partition à la base de donéée
-        var_dump($data);
-        $q = $this->_conn->prepare('INSERT INTO `uku_sheet` (titre, lien_partition, tonalite, tempo)VALUES (:titre, :lien, :tonalite, :tempo)');
-        $q->execute([':titre' => $data['titre'],
-                     ':lien' => $data['lien'],
-                     ':tonalite' => $data['tonalite'],
-                     ':tempo' => $data['tempo']]);
+    // envoyer une image sur le serveur
+        var_dump($img);
 
     }
+    public function ReturnImgPath($img)
+    {
+        return $this->getDestination().$img['name'];
+    }
+// °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+    // GETTER
+// °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+    public function getServeur(){return $this->_serveur;} 
+    public function getDestination(){return $this->_destination;} 
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
     // SETTER
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
-    public function setDb(PDO $conn){$this->_conn = $conn;}
+    public function setServeur(string $serveur){$this->_serveur = $serveur;}
+    public function setDestination(string $destination){$this->_destination = 'http://'.$_SERVER['SERVER_NAME'].$destination;}
 // end
 }
