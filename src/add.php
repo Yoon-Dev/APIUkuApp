@@ -3,12 +3,17 @@ require '../utils/init.php';
 chargerclass('Manager', '../class/');
 chargerclass('ImgWorker', '../class/');
 
-
-$img = $_FILES['img'];
 $data = $_POST;
+$img = $_FILES['img'];
 
 $worker = new ImgWorker('depart', '/img/');
-$data += ['lien' => $worker->ReturnImgPath($img)];
+$fine = $worker->ThrowImgOnServer($img);
 
-$manager = new Manager($conn);
-$manager->add($data);
+if($fine){
+    $data += ['lien' => $worker->ReturnImgPath($img), 'del_link' => $worker->ReturnServImgPath($img)];
+    $manager = new Manager($conn);
+    $manager->add($data);
+    echo '1';
+}else{
+    echo '0';
+}

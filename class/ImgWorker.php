@@ -15,12 +15,42 @@ class ImgWorker{
     public function ThrowImgOnServer($img)
     {
     // envoyer une image sur le serveur
-        var_dump($img);
+        if(file_exists('../img/'.$img['name'])){
+            return false;
+        }else{
+            if($img['type'] === 'application/pdf' || substr($img['type'], 0, 5) === 'image'){
+                move_uploaded_file($img['tmp_name'],'../img/'.$img['name']);
+                return true;
+            }else{
+                return false;
+            }
+        }
+
 
     }
+// °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
     public function ReturnImgPath($img)
     {
         return $this->getDestination().$img['name'];
+    }
+// °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+    public function ReturnServImgPath($img)
+    {
+        return '../img/'.$img['name'];
+    }
+// °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+    public function DelImgServ(int $id, $conn)
+    {
+        $q = $conn->prepare('SELECT `del_link` FROM `uku_sheet` WHERE `id` = :id');
+        $q->execute([':id' => $id]);
+
+        $lienImgServ = $q->fetch(PDO::FETCH_ASSOC);
+
+        if(unlink($lienImgServ['del_link']) && !empty($lienImgServ['del_link'])){
+            return true;
+        }else{
+            return false;
+        }
     }
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
     // GETTER
