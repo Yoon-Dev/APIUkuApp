@@ -71,6 +71,20 @@ class Manager{
         $q->execute([':id' => $id]);
     }
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
+    public function getBdd()
+    {
+    $content = [];
+    // ajoute une partition à la base de donéée
+        $q = $this->_conn->prepare('SELECT * FROM `uku_sheet`');
+        $q->execute();
+
+        while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+        {
+                $content[] = new Bdd($donnees);
+        }
+    return $content;
+    }
+// °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
     // SETTER
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
     public function setDb(PDO $conn){$this->_conn = $conn;}
