@@ -1,0 +1,18 @@
+html, body{
+    background: #eacda3;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #d6ae7b, #eacda3);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #d6ae7b, #eacda3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+img{
+    height: 20vh;
+    box-shadow: 2px 2px 20px 0px black;
+}
+.zelda{
+    margin-top: 2rem;
+}
+@media (min-width: 768px){
+    .zelda{
+        margin-top: 0px;
+    }
+}

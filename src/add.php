@@ -17,3 +17,7 @@ if($fine){
 }else{
     echo '0';
 }
+?>
+<script>
+window.location = "../backoffice/add.php";
+</script>
