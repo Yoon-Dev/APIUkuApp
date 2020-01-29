@@ -1,3 +1,4 @@
+<?php require './data/getSingle.php';$sheet=$manager->getSingle($_GET['id']);?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,27 +14,27 @@
     <meta name="theme-color" content="#B3574D">
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/add.css">
-    <title>Add Form</title>
+    <title>Update Form</title>
 </head>
 
 <body>
-<form action="../src/add.php" method="post" enctype= "multipart/form-data">
+<form action="../src/update.php?id=<?php echo$sheet['id']?>" method="post" enctype= "multipart/form-data">
     <div class="container-fluid">
-        <div class="row">   
+        <div class="row">
             <div class="col-12 d-flex justify-content-start back-btn">
                 <a href="./index.php"><img src="../icon/back-btn-uku.png" alt="Back Btn"></a> 
-            </div>
+            </div>  
             <div class="col-12 d-flex justify-content-center my-3">
-                <label for="titre"><input type="text" name="titre" placeholder="Titre"></label> 
+                <label for="titre"><input type="text" name="titre" placeholder="Titre" value="<?php echo$sheet['titre']?>"></label> 
             </div>
             <div class="col-12 d-flex justify-content-center my-3">
                 <label for="img"><input type="file" name="img" id="img" placeholder="Partition"></label>
             </div>
             <div class="col-12 d-flex justify-content-center my-3">
-                <label for="tonalite"><input type="text" name="tonalite" placeholder="Tonalité"></label> 
+                <label for="tonalite"><input type="text" name="tonalite" placeholder="Tonalité" value="<?php echo$sheet['tonalite']?>"></label> 
             </div>
             <div class="col-12 d-flex justify-content-center my-3">
-                <label for="tempo"><input type="number" name="tempo" placeholder="Tempo"></label> 
+                <label for="tempo"><input type="number" name="tempo" placeholder="Tempo" value="<?php echo$sheet['tempo']?>"></label> 
             </div>
             <div class="col-12 d-flex justify-content-center mt-5 ">
                 <input type="submit" value="Sub" id="sub-btn">

@@ -6,6 +6,7 @@ chargerclass('ImgWorker', '../class/');
 $worker = new ImgWorker('depart', '/img/');
 $manager = new Manager($conn);
 $newimg;
+$fine;
 
 $img = $_FILES['img'];
 $data = $_POST;
@@ -25,13 +26,22 @@ if(!empty($img['tmp_name'])){
             // Nouveau champs bdd
             $data += ['lien' => $worker->ReturnImgPath($img), 'del_link' => $worker->ReturnServImgPath($img)];
             $manager->update($data, $id, boolval($newimg));
-            echo '1';
+            $fine = true;
         }else{
-            echo '0';
+            $fine = false;
         }
     }
 }else{
     $newimg = false;
     $manager->update($data, $id, boolval($newimg));
-    echo '1';
+    $fine = true;
+}
+if($fine){
+?>
+<script>
+window.location = "../backoffice/index.php";
+</script>
+<?php
+}else{
+    echo 'Something gone wrong';
 }

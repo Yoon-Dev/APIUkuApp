@@ -28,6 +28,23 @@ class Manager{
         echo json_encode($content);
     }
 // °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°   
+    public function getSingle($id)
+    {
+    // recupere une row de la bdd
+    $content = [];
+            $id = (int)$id;
+            $q = $this->_conn->prepare('SELECT * FROM `uku_sheet` WHERE `id` = :id');
+            $q->execute([':id' => $id]);
+
+    
+    while ($donnees = $q->fetch(PDO::FETCH_ASSOC))
+        {
+
+                $content[] = $donnees;
+        }
+        return $content[0];
+    }
+// °°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°   
     public function add(array $data)
     {
     // ajoute une partition à la base de donéée

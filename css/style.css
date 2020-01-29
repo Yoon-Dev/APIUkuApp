@@ -1,18 +1,81 @@
 html, body{
-    background: #eacda3;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #d6ae7b, #eacda3);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #d6ae7b, #eacda3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #A1FFCE;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FAFFD1, #A1FFCE);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FAFFD1, #A1FFCE); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+}
+h3, h5{
+    text-align: center;
+}
+.first-uku-sheet {
+    border: none;
+}
+.uku-sheet{
+    opacity: 1;
+    transition: all .5s ease-in-out;
+    border-top: 1px solid #FFAAA1;
+}
+.uku-sheet:last-of-type {
+    border-top: 1px solid #FFAAA1;
+    border-bottom: 1px solid #FFAAA1;
 }
 
-img{
+.row-sheet{
+    min-height: 10vh;
+}
+
+.img{
     height: 20vh;
     box-shadow: 2px 2px 20px 0px black;
 }
+
+.primaire-action{
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    justify-content: flex-end;
+    z-index: 99;
+}
+
+.primaire-action img{
+    width: 25vw;
+}
+
 .zelda{
-    margin-top: 2rem;
+    padding-left: 40px;
+    padding-right: 40px;
 }
+
+.btn-view{
+    color: #ffffff;
+    background-color: #508067;
+    border-color: #508067;
+}
+
+.btn-edit{
+    color: #ffffff;
+    background-color: #CCAB6C;
+    border-color: #CCAB6C;
+}
+/* Media */
+
 @media (min-width: 768px){
-    .zelda{
-        margin-top: 0px;
+    .uku-sheet{
+        border: 1px solid #FFAAA1;
+        border-bottom: none;
     }
-}
+    .first-uku-sheet{
+        border: 1px solid #FFAAA1;
+        border-bottom: none;
+    }
+    .uku-sheet:last-of-type {
+        border: 1px solid #FFAAA1;
+    }
+    .primaire-action{
+        position: relative;
+        justify-content: center;
+    }
+    .primaire-action img{
+        width: 100px
+    }
+}    sheets[0].classList.remove('uku-sheet')

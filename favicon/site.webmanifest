@@ -1,0 +1,20 @@
+{
+    "name": "APIUku",
+    "short_name": "APIUku",
+    "icons": [
+        {
+            "src": "./android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "./android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "../backoffice/index.php",
+    "theme_color": "#B3574D",
+    "background_color": "#A1FFCE",
+    "display": "standalone"
+}
